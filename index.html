@@ -386,7 +386,9 @@
         <h2>Nuestros Productos</h2>
         <div class="productos-grid">
             <div class="producto-card">
-                <div class="producto-img">🍫</div>
+                <div class="producto-img">
+                  <img src="img/budinChocolate.jpeg" alt="Budín de Chocolate" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
                 <div class="producto-info">
                     <h3>Budín de Chocolate</h3>
                     <p>Nuestro clásico budín de chocolate, húmedo y esponjoso.</p>
@@ -414,12 +416,14 @@
             </div>
 
             <div class="producto-card">
-                <div class="producto-img">🥕</div>
+                <div class="producto-img">
+                  <img src="img/budinBanana.jpeg" alt="Budín de Banana" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
                 <div class="producto-info">
-                    <h3>Budín de Zanahoria</h3>
+                    <h3>Budín de Banana</h3>
                     <p>Con nueces y especias, una delicia nutritiva.</p>
                     <ul>
-                        <li>Zanahorias frescas</li>
+                        <li>Bananas frescas</li>
                         <li>Nueces premium</li>
                         <li>Receta tradicional</li>
                     </ul>
@@ -506,7 +510,7 @@
 
     <script>
         function abrirWhatsApp(producto) {
-            const telefono = '59899123456'; // CAMBIAR por tu número (código de país + número sin espacios)
+            const telefono = '5493644327745';
             const mensaje = encodeURIComponent(`Hola! Me interesa consultar sobre: ${producto}`);
             window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
         }
@@ -523,7 +527,7 @@ Email: ${email}
 Teléfono: ${telefono}
 Consulta: ${mensaje}`;
             
-            const telefonoWsp = '5493644327745'; // CAMBIAR por tu número
+            const telefonoWsp = '+5493644327745';
             window.open(`https://wa.me/${telefonoWsp}?text=${encodeURIComponent(textoCompleto)}`, '_blank');
         }
 
