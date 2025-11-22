@@ -1,544 +1,1237 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Budines Artesanales | Dulce Tradición</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
 
-        /* Navbar */
-        nav {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      /* Navbar */
+      nav {
+        background: linear-gradient(135deg, #6b8e6b 0%, #8ba888 100%);
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 0 1rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.3s;
+        display: inline-block;
+      }
+
+      nav a:hover {
+        transform: scale(1.1);
+        text-decoration: underline;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #f5f5dc 0%, #e8f5e8 100%);
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        color: #5a7d5a;
+        margin-bottom: 1rem;
+        animation: fadeInDown 1s;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: #6b8e6b;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+      }
+
+      .logo {
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, #8ba888 0%, #6b8e6b 100%);
+        border-radius: 50%;
+        margin: 0 auto 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        animation: bounce 2s infinite;
+      }
+
+      /* Sections */
+      section {
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      section:nth-child(even) {
+        background: #f5f5dc;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        color: #5a7d5a;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      /* Quienes Somos */
+      .about-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* Para 3 cards (impar) - diseño asimétrico */
+      .about-content:has(.about-card:nth-child(3):last-child) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-content:has(.about-card:nth-child(3):last-child)
+        .about-card:first-child {
+        grid-column: 1 / -1;
+      }
+
+      /* Para 5 cards (impar) - diseño 2-3 */
+      .about-content:has(.about-card:nth-child(5):last-child) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .about-content:has(.about-card:nth-child(5):last-child)
+        .about-card:nth-child(1),
+      .about-content:has(.about-card:nth-child(5):last-child)
+        .about-card:nth-child(2) {
+        grid-column: span 1;
+      }
+
+      .about-content:has(.about-card:nth-child(5):last-child)
+        .about-card:nth-child(1) {
+        grid-column: 1 / 2;
+      }
+
+      .about-content:has(.about-card:nth-child(5):last-child)
+        .about-card:nth-child(2) {
+        grid-column: 2 / 4;
+      }
+
+      /* Para 1 card - centrado y más ancho */
+      .about-content:has(.about-card:only-child) {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .about-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      .about-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .about-card h3 {
+        color: #6b8e6b;
+        margin-bottom: 1rem;
+      }
+
+      /* Productos */
+      .productos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .producto-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .producto-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .producto-img {
+        width: 100%;
+        height: 200px;
+        background: linear-gradient(135deg, #ffe4b5 0%, #deb887 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      }
+
+      .producto-info {
+        padding: 1.5rem;
+      }
+
+      .producto-info h3 {
+        color: #5a7d5a;
+        margin-bottom: 0.5rem;
+      }
+
+      .producto-info ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+      }
+
+      .btn-comprar {
+        background: linear-gradient(135deg, #6b8e6b 0%, #8ba888 100%);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        width: 100%;
+        transition: transform 0.3s;
+      }
+
+      .btn-comprar:hover {
+        transform: scale(1.05);
+      }
+
+      /* Productos Destacados */
+      .productos-destacados {
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background: linear-gradient(
+          135deg,
+          #f5f5dc 0%,
+          #e8f5e8 50%,
+          #f5f5dc 100%
+        );
+        border-radius: 20px;
+      }
+
+      .categoria-titulo {
+        font-size: 2rem;
+        color: #5a7d5a;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      .categoria-subtitulo {
+        text-align: center;
+        color: #6b8e6b;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .productos-grid-destacados {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .producto-card.destacado {
+        border: 3px solid #8ba888;
+        position: relative;
+      }
+
+      .producto-card.destacado::before {
+        content: "⭐ DESTACADO";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #6b8e6b;
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        z-index: 1;
+      }
+
+      /* Categorías de Productos */
+      .productos-categoria {
+        margin: 3rem 0;
+      }
+
+      .productos-grid-simple {
+        display: grid;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      /* Budines Frutales - 2 columnas (2x2 = 4 productos) */
+      #budines-frutales .productos-grid-simple {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Budines Especiales - 3 columnas (3x2 = 6 productos) */
+      #budines-especiales .productos-grid-simple {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .producto-card-simple {
+        background: white;
+        padding: 0;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        overflow: hidden;
+      }
+
+      .producto-card-simple:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        border-color: #8ba888;
+      }
+
+      .producto-card-simple.seleccionado {
+        border-color: #6b8e6b;
+        background: #f5f5dc;
+      }
+
+      .producto-img-simple {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(135deg, #e8f5e8 0%, #c4d4c4 100%);
+      }
+
+      .producto-img-simple img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .producto-nombre-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(90, 125, 90, 0.9) 0%,
+          rgba(90, 125, 90, 0.7) 100%
+        );
+        color: white;
+        padding: 0.8rem;
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .producto-info-simple {
+        padding: 1rem;
+      }
+
+      .producto-icono {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .producto-card-simple h4 {
+        color: #5a7d5a;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .producto-card-simple p {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      /* Panel de Pedido */
+      .pedido-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: slideUp 0.3s ease-out;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      .pedido-contenido {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2.5rem;
+        position: relative;
+      }
+
+      .btn-cerrar {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: #f44336;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s;
+        z-index: 10;
+      }
+
+      .btn-cerrar:hover {
+        transform: scale(1.1);
+      }
+
+      #pedido-titulo {
+        color: #5a7d5a;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+      }
+
+      #pedido-imagen {
+        width: 100%;
+        max-width: 400px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin: 0 auto 1.5rem;
+        display: block;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      #pedido-descripcion {
+        color: #666;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+      }
+
+      .toppings-section {
+        background: #f5f5dc;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+      }
+
+      .toppings-section h4 {
+        color: #5a7d5a;
+        margin-bottom: 1rem;
+      }
+
+      .toppings-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .topping-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        padding: 0.8rem;
+        background: white;
+        border-radius: 8px;
+        transition: background 0.3s;
+      }
+
+      .topping-option:hover {
+        background: #e8f5e8;
+      }
+
+      .topping-option input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      .topping-option span {
+        font-size: 1rem;
+        color: #333;
+      }
+
+      .btn-confirmar-pedido {
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        color: white;
+        border: none;
+        padding: 1.2rem 2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        width: 100%;
+        transition: transform 0.3s;
+      }
+
+      .btn-confirmar-pedido:hover {
+        transform: scale(1.02);
+      }
+
+      /* Contacto */
+      .contacto-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .contacto-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #5a7d5a;
+        font-weight: 600;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #c4d4c4;
+        border-radius: 8px;
+        font-family: inherit;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .btn-enviar {
+        background: linear-gradient(135deg, #6b8e6b 0%, #8ba888 100%);
+        color: white;
+        border: none;
+        padding: 1rem 3rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: transform 0.3s;
+      }
+
+      .btn-enviar:hover {
+        transform: scale(1.05);
+      }
+
+      .contacto-info {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-item {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: start;
+        gap: 1rem;
+      }
+
+      .info-item-icon {
+        font-size: 1.5rem;
+        min-width: 30px;
+      }
+
+      .mapa {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(135deg, #ffe4b5 0%, #deb887 100%);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin-top: 1rem;
+      }
+
+      /* WhatsApp Button */
+      .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: transform 0.3s;
+        z-index: 1000;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+      }
+
+      /* Footer */
+      footer {
+        background: linear-gradient(135deg, #6b8e6b 0%, #8ba888 100%);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      /* Animations */
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
         }
 
         nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            padding: 0 1rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
-            display: inline-block;
-        }
-
-        nav a:hover {
-            transform: scale(1.1);
-            text-decoration: underline;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #FFF8DC 0%, #FFE4B5 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            color: #8B4513;
-            margin-bottom: 1rem;
-            animation: fadeInDown 1s;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #654321;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            animation: bounce 2s infinite;
-        }
-
-        /* Sections */
-        section {
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section:nth-child(even) {
-            background: #FFF8DC;
+          gap: 1rem;
         }
 
         h2 {
-            font-size: 2.5rem;
-            color: #8B4513;
-            margin-bottom: 2rem;
-            text-align: center;
+          font-size: 2rem;
         }
 
-        /* Quienes Somos */
-        .about-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .about-content,
+        .about-content:has(.about-card:nth-child(3):last-child),
+        .about-content:has(.about-card:nth-child(5):last-child) {
+          grid-template-columns: 1fr !important;
         }
 
-        .about-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+        .about-content .about-card {
+          grid-column: auto !important;
         }
 
-        .about-card:hover {
-            transform: translateY(-10px);
+        #budines-frutales .productos-grid-simple,
+        #budines-especiales .productos-grid-simple {
+          grid-template-columns: 1fr !important;
         }
 
-        .about-card h3 {
-            color: #D2691E;
-            margin-bottom: 1rem;
+        .pedido-contenido {
+          padding: 1.5rem;
         }
-
-        /* Productos */
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .producto-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .producto-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .producto-img {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #FFE4B5 0%, #DEB887 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .producto-info {
-            padding: 1.5rem;
-        }
-
-        .producto-info h3 {
-            color: #8B4513;
-            margin-bottom: 0.5rem;
-        }
-
-        .producto-info ul {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-        }
-
-        .btn-comprar {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            transition: transform 0.3s;
-        }
-
-        .btn-comprar:hover {
-            transform: scale(1.05);
-        }
-
-        /* Contacto */
-        .contacto-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .contacto-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #8B4513;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #DEB887;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-enviar {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            color: white;
-            border: none;
-            padding: 1rem 3rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.3s;
-        }
-
-        .btn-enviar:hover {
-            transform: scale(1.05);
-        }
-
-        .contacto-info {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .info-item {
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: start;
-            gap: 1rem;
-        }
-
-        .info-item-icon {
-            font-size: 1.5rem;
-            min-width: 30px;
-        }
-
-        .mapa {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #FFE4B5 0%, #DEB887 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin-top: 1rem;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.3s;
-            z-index: 1000;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav>
-        <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#quienes-somos">Quiénes Somos</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#quienes-somos">Quiénes Somos</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
     </nav>
 
     <!-- Hero Section / Inicio -->
     <section id="inicio" class="hero">
-        <div class="logo">
-    <img src="img/logo.jpeg" alt="Logo Budines" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-</div>
-        <h1>Budines Artesanales</h1>
-        <p>Disfrutá lo dulce sin culpa 100 % integral.</p>
+      <div class="logo">
+        <img
+          src="img/logo.jpeg"
+          alt="Logo Budines"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+          "
+        />
+      </div>
+      <h1>Budines Artesanales</h1>
+      <p>Disfrutá lo dulce sin culpa 100 % integral.</p>
     </section>
 
     <!-- Quiénes Somos -->
     <section id="quienes-somos">
-        <h2>Quiénes Somos</h2>
-        <div class="about-content">
-            <div class="about-card">
-                <h3>📖 Nuestra Historia</h3>
-                <p>Somos un emprendimiento familiar que nació del amor por la repostería tradicional. Con más de 10 años de experiencia, hemos perfeccionado nuestras recetas para ofrecerte budines únicos y deliciosos.</p>
-            </div>
-            <div class="about-card">
-                <h3>👥 Nuestro Equipo</h3>
-                <p>Un equipo apasionado de reposteros artesanales dedicados a crear productos de la más alta calidad. Cada budín es elaborado con dedicación y cariño.</p>
-            </div>
-            <div class="about-card">
-                <h3>🎯 Nuestra Misión</h3>
-                <p>Llevar a cada hogar el sabor auténtico de los budines caseros, manteniendo viva la tradición familiar y utilizando solo ingredientes naturales de primera calidad.</p>
-            </div>
+      <h2>Quiénes Somos</h2>
+      <div class="about-content">
+        <div class="about-card">
+          <h3>📖 Nuestra Historia</h3>
+          <p>
+            DulceFit nació como un pequeño sueño en la cocina familiar, en el
+            corazón del Chaco. Todo comenzó con la idea de crear un dulce que
+            uniera dos mundos que parecían opuestos: lo saludable y lo
+            tradicional. Inspirados en los ingredientes propios de nuestra
+            tierra ( la algarroba, el mamon del monte, el ñangapirí ) comenzamos
+            a experimentar recetas que combinaran lo nutritivo con lo regional.
+          </p>
         </div>
+        <div class="about-card">
+          <h3>👥 Nuestro Equipo</h3>
+          <p>
+            Un equipo apasionado de reposteros artesanales dedicados a crear
+            productos de la más alta calidad. Cada budín es elaborado con
+            dedicación y cariño.
+          </p>
+        </div>
+        <div class="about-card">
+          <h3>🎯 Nuestra Misión</h3>
+          <p>
+            Elaborar y comercializar budines integrales de alta calidad,
+            inspirados en los sabores tradicionales del Chaco y preparados sin
+            harinas refinadas ni conservantes. Buscamos ofrecer dulces
+            nutritivos, naturales y auténticos para quienes desean cuidar su
+            alimentación sin renunciar al placer de disfrutar.
+          </p>
+        </div>
+        <div class="about-card">
+          <h3>🎯 Nuestra Visión</h3>
+          <p>
+            Ser una marca reconocida a nivel local y regional por ofrecer
+            productos dulces saludables e innovadores, elaborados con
+            ingredientes 100% integrales, naturales y propios del Chaco.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Productos -->
     <section id="productos">
-        <h2>Nuestros Productos</h2>
-        <div class="productos-grid">
-            <div class="producto-card">
-                <div class="producto-img">
-                  <img src="img/budinChocolate.jpeg" alt="Budín de Chocolate" style="width: 100%; height: 100%; object-fit: cover;">
-              </div>
-                <div class="producto-info">
-                    <h3>Budín de Chocolate</h3>
-                    <p>Nuestro clásico budín de chocolate, húmedo y esponjoso.</p>
-                    <ul>
-                        <li>100% chocolate de calidad</li>
-                        <li>Sin conservantes</li>
-                        <li>Duración: 7 días</li>
-                    </ul>
-                    <button class="btn-comprar" onclick="abrirWhatsApp('Budín de Chocolate')">Comprar Ahora</button>
-                </div>
-            </div>
+      <h2>Nuestros Productos</h2>
 
-            <div class="producto-card">
-                <div class="producto-img">🍋</div>
-                <div class="producto-info">
-                    <h3>Budín de Limón</h3>
-                    <p>Refrescante y aromático, perfecto para acompañar el té.</p>
-                    <ul>
-                        <li>Limones naturales</li>
-                        <li>Glaseado casero</li>
-                        <li>Suave y esponjoso</li>
-                    </ul>
-                    <button class="btn-comprar" onclick="abrirWhatsApp('Budín de Limón')">Comprar Ahora</button>
-                </div>
-            </div>
+      <!-- Budines Chaqueños Destacados -->
+      <div class="productos-destacados">
+        <h3 class="categoria-titulo">
+          🌿 Budines Chaqueños - Nuestra Especialidad
+        </h3>
+        <p class="categoria-subtitulo">
+          Sabores únicos del Chaco, elaborados con ingredientes autóctonos de la
+          región
+        </p>
 
-            <div class="producto-card">
-                <div class="producto-img">
-                  <img src="img/budinBanana.jpeg" alt="Budín de Banana" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div class="producto-info">
-                    <h3>Budín de Banana</h3>
-                    <p>Con nueces y especias, una delicia nutritiva.</p>
-                    <ul>
-                        <li>Bananas frescas</li>
-                        <li>Nueces premium</li>
-                        <li>Receta tradicional</li>
-                    </ul>
-                    <button class="btn-comprar" onclick="abrirWhatsApp('Budín de Zanahoria')">Comprar Ahora</button>
-                </div>
+        <div class="productos-grid-destacados">
+          <div class="producto-card destacado">
+            <div class="producto-img">
+              <img
+                src="img/budinAlgarroba.jpeg"
+                alt="Budín de Algarroba"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
             </div>
+            <div class="producto-info">
+              <h3>Budín de Harina de Algarroba</h3>
+              <p>
+                Con corazón de dulce de leche. Un sabor auténtico del Chaco que
+                te sorprenderá.
+              </p>
+              <ul>
+                <li>🌳 Harina de algarroba chaqueña</li>
+                <li>🍯 Corazón de dulce de leche casero</li>
+                <li>✨ 100% integral y natural</li>
+              </ul>
+              <button
+                class="btn-comprar"
+                onclick="abrirWhatsApp('Budín de Harina de Algarroba con corazón de dulce de leche')"
+              >
+                Comprar Ahora
+              </button>
+            </div>
+          </div>
+
+          <div class="producto-card destacado">
+            <div class="producto-img">
+              <img
+                src="img/budinMamon.jpeg"
+                alt="Budín con Mamón"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <div class="producto-info">
+              <h3>Budín Integral con Mamón del Monte</h3>
+              <p>
+                Trozos generosos de mamón del monte en un budín integral único.
+              </p>
+              <ul>
+                <li>🍊 Mamón del monte fresco</li>
+                <li>🌾 100% harina integral</li>
+                <li>💚 Sabor tradicional chaqueño</li>
+              </ul>
+              <button
+                class="btn-comprar"
+                onclick="abrirWhatsApp('Budín integral con trozos de mamón del monte')"
+              >
+                Comprar Ahora
+              </button>
+            </div>
+          </div>
+
+          <div class="producto-card destacado">
+            <div class="producto-img">
+              <img
+                src="img/budinÑangapirí.jpeg"
+                alt="Budín de Ñangapirí"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <div class="producto-info">
+              <h3>Budín Integral de Ñangapirí / Pitanga</h3>
+              <p>El exquisito sabor de la pitanga chaqueña en cada bocado.</p>
+              <ul>
+                <li>🔴 Ñangapirí (Eugenia uniflora)</li>
+                <li>🌿 Fruta nativa del Chaco</li>
+                <li>💯 Sabor único e inigualable</li>
+              </ul>
+              <button
+                class="btn-comprar"
+                onclick="abrirWhatsApp('Budín integral de Ñangapirí / Pitanga')"
+              >
+                Comprar Ahora
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- Budines Frutales -->
+      <div id="budines-frutales" class="productos-categoria">
+        <h3 class="categoria-titulo">🍋 Budines Frutales</h3>
+        <div class="productos-grid-simple">
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín integral de banana')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinBanana.jpeg" alt="Budín de Banana" />
+              <div class="producto-nombre-overlay">Budín de Banana</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Suave y aromático</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín integral de naranja')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinNaranja.jpeg" alt="Budín de Naranja" />
+              <div class="producto-nombre-overlay">Budín de Naranja</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Cítrico y refrescante</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín integral de manzana')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinManzana.jpeg" alt="Budín de Manzana" />
+              <div class="producto-nombre-overlay">Budín de Manzana</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Con canela y especias</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín integral de limón')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinLimon.jpeg" alt="Budín de Limón" />
+              <div class="producto-nombre-overlay">Budín de Limón</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Fresco y aromático</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Budines Especiales -->
+      <div id="budines-especiales" class="productos-categoria">
+        <h3 class="categoria-titulo">⭐ Budines Especiales</h3>
+        <div class="productos-grid-simple">
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín con frutos secos')"
+          >
+            <div class="producto-img-simple">
+              <img
+                src="img/budinFrutosSecos.jpeg"
+                alt="Budín con Frutos Secos"
+              />
+              <div class="producto-nombre-overlay">Budín con Frutos Secos</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Nueces, almendras y más</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín con chips de chocolate')"
+          >
+            <div class="producto-img-simple">
+              <img
+                src="img/budinChips.jpeg"
+                alt="Budín con Chips de Chocolate"
+              />
+              <div class="producto-nombre-overlay">
+                Budín con Chips de Chocolate
+              </div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Irresistible dulzura</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín de chocolate')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinChocolate.jpeg" alt="Budín de Chocolate" />
+              <div class="producto-nombre-overlay">Budín de Chocolate</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Intenso y esponjoso</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín de carrot cake')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinCarrotCake.jpeg" alt="Budín Carrot Cake" />
+              <div class="producto-nombre-overlay">Budín Carrot Cake</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Zanahoria y especias</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín marmolado')"
+          >
+            <div class="producto-img-simple">
+              <img src="img/budinMarmolado.jpeg" alt="Budín Marmolado" />
+              <div class="producto-nombre-overlay">Budín Marmolado</div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Vainilla y chocolate</p>
+            </div>
+          </div>
+          <div
+            class="producto-card-simple"
+            onclick="seleccionarProducto(this, 'Budín con chips y frutos secos')"
+          >
+            <div class="producto-img-simple">
+              <img
+                src="img/budinChipsFrutos.jpeg"
+                alt="Budín Chips y Frutos Secos"
+              />
+              <div class="producto-nombre-overlay">
+                Budín Chips y Frutos Secos
+              </div>
+            </div>
+            <div class="producto-info-simple">
+              <p>Combinación perfecta</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selector de Pedido -->
+      <div id="pedido-panel" class="pedido-panel" style="display: none">
+        <div class="pedido-contenido">
+          <button class="btn-cerrar" onclick="cerrarPanel()">✕</button>
+          <h3 id="pedido-titulo">Producto seleccionado</h3>
+          <img
+            id="pedido-imagen"
+            src=""
+            alt="Producto seleccionado"
+            style="display: none"
+          />
+          <p id="pedido-descripcion"></p>
+
+          <div class="toppings-section">
+            <h4>🍯 Toppings Extras (opcional - costo adicional)</h4>
+            <div class="toppings-grid">
+              <label class="topping-option">
+                <input type="checkbox" value="Glaseado de limón" />
+                <span>🍋 Glaseado de Limón</span>
+              </label>
+              <label class="topping-option">
+                <input type="checkbox" value="Glaseado de naranja" />
+                <span>🍊 Glaseado de Naranja</span>
+              </label>
+              <label class="topping-option">
+                <input type="checkbox" value="Cobertura de chocolate" />
+                <span>🍫 Cobertura de Chocolate</span>
+              </label>
+            </div>
+          </div>
+
+          <button class="btn-confirmar-pedido" onclick="confirmarPedido()">
+            💬 Enviar Pedido por WhatsApp
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Contacto -->
     <section id="contacto">
-        <h2>Contacto</h2>
-        <div class="contacto-container">
-            <div class="contacto-form">
-                <h3>📧 Formulario de Contacto</h3>
-                <p>Envianos tu consulta y te responderemos a la brevedad:</p>
-                <form onsubmit="enviarConsulta(event)">
-                    <div class="form-group">
-                        <label>Nombre:</label>
-                        <input type="text" id="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email:</label>
-                        <input type="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono:</label>
-                        <input type="tel" id="telefono">
-                    </div>
-                    <div class="form-group">
-                        <label>Consulta:</label>
-                        <textarea id="mensaje" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-enviar">Enviar Consulta</button>
-                </form>
+      <h2>Contacto</h2>
+      <div class="contacto-container">
+        <div class="contacto-form">
+          <h3>📧 Formulario de Contacto</h3>
+          <p>Envianos tu consulta y te responderemos a la brevedad:</p>
+          <form onsubmit="enviarConsulta(event)">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" id="nombre" required />
             </div>
-
-            <div class="contacto-info">
-                <h3>📍 Información de Contacto</h3>
-                <div class="info-item">
-                    <div class="info-item-icon">📍</div>
-                    <div>
-                        <strong>Dirección:</strong><br>
-                        Av. 2, Sanchez Sur, Argentina
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">📞</div>
-                    <div>
-                        <strong>Teléfono:</strong><br>
-                        +5493644327745
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">✉️</div>
-                    <div>
-                        <strong>Email:</strong><br>
-                        info@budinesartesanales.com
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">⏰</div>
-                    <div>
-                        <strong>Horario:</strong><br>
-                        Lunes a Viernes: 9:00 - 18:00 <br>
-                        Sábado: 9:00 - 14:00
-                    </div>
-                </div>
-                <div class="mapa">🗺️</div>
+            <div class="form-group">
+              <label>Email:</label>
+              <input type="email" id="email" required />
             </div>
+            <div class="form-group">
+              <label>Teléfono:</label>
+              <input type="tel" id="telefono" />
+            </div>
+            <div class="form-group">
+              <label>Consulta:</label>
+              <textarea id="mensaje" required></textarea>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar Consulta</button>
+          </form>
         </div>
+
+        <div class="contacto-info">
+          <h3>📍 Información de Contacto</h3>
+          <div class="info-item">
+            <div class="info-item-icon">📍</div>
+            <div>
+              <strong>Dirección:</strong><br />
+              Av. 2, Sanchez Sur, Argentina
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-icon">📞</div>
+            <div>
+              <strong>Teléfono:</strong><br />
+              +5493644327745
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-icon">✉️</div>
+            <div>
+              <strong>Email:</strong><br />
+              info@budinesartesanales.com
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-icon">⏰</div>
+            <div>
+              <strong>Horario:</strong><br />
+              Lunes a Viernes: 9:00 - 18:00 <br />
+              Sábado: 9:00 - 14:00
+            </div>
+          </div>
+          <div class="mapa">🗺️</div>
+        </div>
+      </div>
     </section>
 
     <!-- WhatsApp Float Button -->
     <div class="whatsapp-float" onclick="abrirWhatsApp('Consulta general')">
-        💬
+      💬
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Budines Artesanales. Todos los derechos reservados.</p>
-        <p>Hecho con ❤️ y mucho dulce de leche</p>
+      <p>&copy; 2025 Budines Artesanales. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ y mucho dulce de leche</p>
     </footer>
 
     <script>
-        function abrirWhatsApp(producto) {
-            const telefono = '5493644327745';
-            const mensaje = encodeURIComponent(`Hola! Me interesa consultar sobre: ${producto}`);
-            window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
-        }
+      function abrirWhatsApp(producto) {
+        const telefono = "5493644327745";
+        const mensaje = encodeURIComponent(
+          `Hola! Me interesa consultar sobre: ${producto}`
+        );
+        window.open(`https://wa.me/${telefono}?text=${mensaje}`, "_blank");
+      }
 
-        function enviarConsulta(event) {
-            event.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const telefono = document.getElementById('telefono').value;
-            const mensaje = document.getElementById('mensaje').value;
-            
-            const textoCompleto = `Hola! Mi nombre es ${nombre}.
+      function enviarConsulta(event) {
+        event.preventDefault();
+        const nombre = document.getElementById("nombre").value;
+        const email = document.getElementById("email").value;
+        const telefono = document.getElementById("telefono").value;
+        const mensaje = document.getElementById("mensaje").value;
+
+        const textoCompleto = `Hola! Mi nombre es ${nombre}.
 Email: ${email}
 Teléfono: ${telefono}
 Consulta: ${mensaje}`;
-            
-            const telefonoWsp = '+5493644327745';
-            window.open(`https://wa.me/${telefonoWsp}?text=${encodeURIComponent(textoCompleto)}`, '_blank');
+
+        const telefonoWsp = "+5493644327745";
+        window.open(
+          `https://wa.me/${telefonoWsp}?text=${encodeURIComponent(
+            textoCompleto
+          )}`,
+          "_blank"
+        );
+      }
+
+      let productoSeleccionado = "";
+
+      function seleccionarProducto(element, nombreProducto) {
+        // Remover selección previa
+        document.querySelectorAll(".producto-card-simple").forEach((card) => {
+          card.classList.remove("seleccionado");
+        });
+
+        // Seleccionar nuevo producto
+        element.classList.add("seleccionado");
+        productoSeleccionado = nombreProducto;
+
+        // Obtener la imagen del producto seleccionado
+        const imgElement = element.querySelector(".producto-img-simple img");
+        const imgSrc = imgElement ? imgElement.src : "";
+
+        // Mostrar panel de pedido
+        document.getElementById("pedido-panel").style.display = "block";
+        document.getElementById("pedido-titulo").textContent = nombreProducto;
+
+        // Mostrar imagen en el modal
+        const pedidoImagen = document.getElementById("pedido-imagen");
+        if (imgSrc) {
+          pedidoImagen.src = imgSrc;
+          pedidoImagen.style.display = "block";
+          pedidoImagen.alt = nombreProducto;
+        } else {
+          pedidoImagen.style.display = "none";
         }
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+        document.getElementById("pedido-descripcion").textContent =
+          "Seleccioná los toppings extras que desees agregar (opcional):";
+
+        // Scroll suave al panel
+        setTimeout(() => {
+          document
+            .getElementById("pedido-panel")
+            .scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 100);
+      }
+
+      function cerrarPanel() {
+        document.getElementById("pedido-panel").style.display = "none";
+        document.querySelectorAll(".producto-card-simple").forEach((card) => {
+          card.classList.remove("seleccionado");
         });
+        // Limpiar checkboxes
+        document
+          .querySelectorAll(".topping-option input")
+          .forEach((checkbox) => {
+            checkbox.checked = false;
+          });
+      }
+
+      function confirmarPedido() {
+        const toppingsSeleccionados = [];
+        document
+          .querySelectorAll(".topping-option input:checked")
+          .forEach((checkbox) => {
+            toppingsSeleccionados.push(checkbox.value);
+          });
+
+        let mensaje = `Hola! Me interesa consultar sobre: ${productoSeleccionado}`;
+
+        if (toppingsSeleccionados.length > 0) {
+          mensaje += `\n\nToppings extras:\n${toppingsSeleccionados
+            .map((t) => `- ${t}`)
+            .join("\n")}`;
+        }
+
+        const telefono = "5493644327745";
+        window.open(
+          `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,
+          "_blank"
+        );
+
+        cerrarPanel();
+      }
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
